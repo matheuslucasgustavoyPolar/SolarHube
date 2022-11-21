@@ -135,6 +135,7 @@ _G.Color = Color3.fromRGB(68, 202, 186)
 
 _G.Setting_table = {
     Auto_Farm = false,
+	Select_Mode_Farm = nil,
     FastAttack = true,
 	Weapon = nil,
 	Auto_Buso = true,
@@ -291,21 +292,24 @@ function TelePBoss(p)
 			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-6508.5581054688, 89.034996032715, -132.83953857422))
 			_G.Stop_Tween = nil
 		else
-			Mix_Farm = true
-			_G.Stop_Tween = true
-			game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
-			repeat task.wait()
-				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = p
-				task.wait()
-				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-				task.wait(.2)
-			until (p.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 1500 and game.Players.LocalPlayer.Character.Humanoid.Health > 0
-			task.wait(.3)
-			_G.Stop_Tween = nil
-			Mix_Farm = nil
+			if _G.Setting_table.Select_Mode_Farm == "Fast Mode" then
+				Mix_Farm = true
+				_G.Stop_Tween = true
+				game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
+				repeat task.wait()
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = p
+					task.wait()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+					task.wait(.2)
+				until (p.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 1500 and game.Players.LocalPlayer.Character.Humanoid.Health > 0
+				task.wait(.3)
+				_G.Stop_Tween = nil
+				Mix_Farm = nil
+			end
+			end
 		end
 	end
-end
+	
 
 function CheckQuestBoss()
 	-- Old World
@@ -4312,6 +4316,30 @@ spawn(function()
 		end)
 	end
 end)
+
+if _G.Setting_table.Select_Mode_Farm == nil then
+	_G.Setting_table.Select_Mode_Farm = "Normal Mode"
+end
+
+Mode = {
+	"Normal Mode",
+	"Fast Mode"
+}
+
+General_Tab:Dropdown("Select Farm Mode",_G.Setting_table.Select_Mode_Farm,Mode,function(vu)
+	_G.Setting_table.Select_Mode_Farm = vu
+	Update_Setting(getgenv()['MyName'])
+	if _G.Setting_table.Select_Mode_Farm == "Normal Mode" then
+		_G.Farm_Mode = vu
+		_G.Setting_table.Select_Mode_Farm = vu
+		Update_Setting(getgenv()['MyName'])
+	elseif _G.Setting_table.Select_Mode_Farm == "Fast Mode" then
+		_G.Farm_Mode = vu
+		_G.Setting_table.Select_Mode_Farm = vu
+		Update_Setting(getgenv()['MyName'])
+	end
+end)
+
 General_Tab:Dropdown("FastAttack","Fast",MIo,function(vu)
 	_G.Setting_table.FastAttack_Mode = vu
 	Update_Setting(getgenv()['MyName'])
