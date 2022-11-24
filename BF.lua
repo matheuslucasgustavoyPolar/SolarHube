@@ -4338,9 +4338,9 @@ General_Tab:Dropdown("Select Farm Mode",_G.Setting_table.Select_Mode_Farm,Mode,f
 		_G.Setting_table.Select_Mode_Farm = vu
 		Update_Setting(getgenv()['MyName'])
 	end
-end)
+end) 
 
-General_Tab:Dropdown("FastAttack","Fast",MIo,function(vu)
+General_Tab:Dropdown("Fast Attack","Fast",MIo,function(vu)
 	_G.Setting_table.FastAttack_Mode = vu
 	Update_Setting(getgenv()['MyName'])
 	if _G.Setting_table.FastAttack_Mode == "Fast" then
@@ -10439,744 +10439,782 @@ function activatefly()
 	start()
 end
 
-  Quest_Tab:Seperator("Materials")
+Quest_Tab:Seperator("Materials")
 
- Quest_Tab:Label("Third World")
+--Quest_Tab:Label("Third World")
+
+if Three_World then
 
 Quest_Tab:Toggle("Auto Farm Conjured Cocoa [Sea 3]","9610159123",_G.Setting_table.AutoFarm_Conjured_Cocoa,function(vu)
-    Auto_Farm_Conjured_Cocoa = vu
-	_G.Setting_table.AutoFarm_Conjured_Cocoa = vu
-	Update_Setting(getgenv()['MyName'])
+   Auto_Farm_Conjured_Cocoa = vu
+   _G.Setting_table.AutoFarm_Conjured_Cocoa = vu
+   Update_Setting(getgenv()['MyName'])
+
+  end)
+
+Quest_Tab:Toggle("Auto Dragon Scale [Sea 3]","9610159123",_G.Setting_table.DragonScale,function(vu)
+   DragonScale = vu
+   _G.Setting_table.DragonScale = vu
+   Update_Setting(getgenv()['MyName'])
+   
+   end)
+
+   Quest_Tab:Toggle("Auto Mini Tusk [Sea 3]","9610159123",_G.Setting_table.Tusk,function(vu)
+   Tusk = vu
+   _G.Setting_table.Tusk = vu
+   Update_Setting(getgenv()['MyName'])
+
+   end)
+		 
+   Quest_Tab:Toggle("Auto Gunpowder [Sea 3]","9610159123",_G.Setting_table.powder,function(vu)
+   powder = vu
+   _G.Setting_table.powder = vu
+   Update_Setting(getgenv()['MyName'])
 
    end)
 
-Quest_Tab:Toggle("Auto Dragon Scale [Sea 3]","9610159123",_G.Setting_table.DragonScale,function(vu)
-    DragonScale = vu
-	_G.Setting_table.DragonScale = vu
-	Update_Setting(getgenv()['MyName'])
-	
-	end)
+   Quest_Tab:Toggle("Auto Demonic Wisp [Sea 3]","9610159123",_G.Setting_table.demonic,function(vu)
+   demonic = vu
+   _G.Setting_table.demonic = vu
+   Update_Setting(getgenv()['MyName'])
 
-	Quest_Tab:Toggle("Auto Mini Tusk [Sea 3]","9610159123",_G.Setting_table.Tusk,function(vu)
-	Tusk = vu
-	_G.Setting_table.Tusk = vu
-	Update_Setting(getgenv()['MyName'])
+   end)
 
-	end)
-		  
-	Quest_Tab:Toggle("Auto Gunpowder [Sea 3]","9610159123",_G.Setting_table.powder,function(vu)
-	powder = vu
-	_G.Setting_table.powder = vu
-	Update_Setting(getgenv()['MyName'])
+   Quest_Tab:Toggle("Auto Fish Tails [Sea 3]","9610159123",_G.Setting_table.FishTails,function(vu)
+   FishTails1 = vu
+   FishTails = vu
+   _G.Setting_table.FishTails = vu
+   Update_Setting(getgenv()['MyName'])
 
-	end)
+   end)
 
-	Quest_Tab:Toggle("Auto Demonic Wisp [Sea 3]","9610159123",_G.Setting_table.demonic,function(vu)
-	demonic = vu
-	_G.Setting_table.demonic = vu
-	Update_Setting(getgenv()['MyName'])
+   Quest_Tab:Toggle("Auto Leather And Scrap Metal [Sea 3]","9610159123",_G.Setting_table.Leather,function(vu)
+   Leather = vu
+   _G.Setting_table.Leather = vu
+   Update_Setting(getgenv()['MyName'])
 
-	end)
-
-	Quest_Tab:Toggle("Auto Fish Tails [Sea 3 and Sea 1]","9610159123",_G.Setting_table.FishTails,function(vu)
-	FishTails1 = vu
-    FishTails = vu
-	_G.Setting_table.FishTails = vu
-	Update_Setting(getgenv()['MyName'])
-
-	end)
-
-	Quest_Tab:Toggle("Auto Leather And Scrap Metal [All Sea]","9610159123",_G.Setting_table.Leather,function(vu)
-	Leather = vu
-	Leather1 = vu
-	Leather2 = vu
-	_G.Setting_table.Leather = vu
-	Update_Setting(getgenv()['MyName'])
-
-	end)
+   end)
+end
 
 spawn(function()
-	while wait(.5) do
-		if Auto_Farm_Conjured_Cocoa and Mix_Farm and Three_World then
-			if game.Workspace.Enemies:FindFirstChild("Cocoa Warrior [Lv. 2300]") or game.ReplicatedStorage:FindFirstChild("Cocoa Warrior [Lv. 2300]") or game.Workspace.Enemies:FindFirstChild("Chocolate Bar Battler [Lv. 2325]") or game.ReplicatedStorage:FindFirstChild("Chocolate Bar Battler [Lv. 2325]") then
-				Mix_Farm = true
-				if game.Workspace.Enemies:FindFirstChild("Cocoa Warrior [Lv. 2300]") or game.Workspace.Enemies:FindFirstChild("Chocolate Bar Battler [Lv. 2325]") then
-					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-					for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-						if v.Name == "Cocoa Warrior [Lv. 2300]" or v.Name == "Chocolate Bar Battler [Lv. 2325]" and v.Humanoid.Health > 0 then
-							_G.PosMon = v.HumanoidRootPart.CFrame
-							StatrMagnet = true
-							repeat wait(_G.Fast_Delay)
-								for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-									if v2:IsA("Tool") then
-										if tostring(v2.ToolTip) == "Melee" then
-											_G.Setting_table.Weapon = v2.Name
-										end
-									end
-								end
-								EquipWeapon(_G.Setting_table.Weapon)
-								TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-								AttackNoCD()
-							until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not Auto_Farm_Conjured_Cocoa
-							Mix_Farm = nil
-						end
-					end
-				end
-			else
-				StatrMagnet = false
-				for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-					if v.Name == "Cocoa Warrior [Lv. 2300]" then
-						TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-					elseif v.Name == "Chocolate Bar Battler [Lv. 2325]" then
-						TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-					end
-				end
-				TP2(CFrame.new(402.7189025878906, 81.06050109863281, -12259.54296875))
-			end
-	end
+   while wait(.5) do
+	   if Auto_Farm_Conjured_Cocoa and Mix_Farm and Three_World then
+		   if game.Workspace.Enemies:FindFirstChild("Cocoa Warrior [Lv. 2300]") or game.ReplicatedStorage:FindFirstChild("Cocoa Warrior [Lv. 2300]") or game.Workspace.Enemies:FindFirstChild("Chocolate Bar Battler [Lv. 2325]") or game.ReplicatedStorage:FindFirstChild("Chocolate Bar Battler [Lv. 2325]") then
+			   Mix_Farm = true
+			   if game.Workspace.Enemies:FindFirstChild("Cocoa Warrior [Lv. 2300]") or game.Workspace.Enemies:FindFirstChild("Chocolate Bar Battler [Lv. 2325]") then
+				   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+				   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+					   if v.Name == "Cocoa Warrior [Lv. 2300]" or v.Name == "Chocolate Bar Battler [Lv. 2325]" and v.Humanoid.Health > 0 then
+						   _G.PosMon = v.HumanoidRootPart.CFrame
+						   StatrMagnet = true
+						   repeat wait(_G.Fast_Delay)
+							   for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+								   if v2:IsA("Tool") then
+									   if tostring(v2.ToolTip) == "Melee" then
+										   _G.Setting_table.Weapon = v2.Name
+									   end
+								   end
+							   end
+							   EquipWeapon(_G.Setting_table.Weapon)
+							   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+							   AttackNoCD()
+						   until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not Auto_Farm_Conjured_Cocoa
+						   Mix_Farm = nil
+					   end
+				   end
+			   end
+		   else
+			   StatrMagnet = false
+			   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+				   if v.Name == "Cocoa Warrior [Lv. 2300]" then
+					   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+				   elseif v.Name == "Chocolate Bar Battler [Lv. 2325]" then
+					   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+				   end
+			   end
+			   TP2(CFrame.new(402.7189025878906, 81.06050109863281, -12259.54296875))
+		   end
+   end
 end
 end)
 
-	    spawn(function()
-        while wait() do
-            if DragonScale and Three_World then
-					if game.Workspace.Enemies:FindFirstChild("Dragon Crew Archer [Lv. 1600]") or game.ReplicatedStorage:FindFirstChild("Dragon Crew Archer [Lv. 1600]") then
-					if game.Workspace.Enemies:FindFirstChild("Dragon Crew Archer [Lv. 1600]") then
-						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-						for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-							if v.Name == "Dragon Crew Archer [Lv. 1600]" and v.Humanoid.Health > 0 then
-								_G.PosMon = v.HumanoidRootPart.CFrame
-								StatrMagnet = true
-									repeat wait(_G.Fast_Delay)
-										for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-											if v2:IsA("Tool") then
-												if tostring(v2.ToolTip) == "Melee" then
-													_G.Setting_table.Weapon = v2.Name
-												end
-											end
-										end
-										EquipWeapon(_G.Setting_table.Weapon)
-										TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-										AttackNoCD()
-									until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not DragonScale
-								end
-							end
-						end
-					else
-						StatrMagnet = false
-						for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-							if v.Name == "Dragon Crew Archer [Lv. 1600]" then
-								TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-							end
-						end
-						TP2(CFrame.new(6668.38232, 378.416321, 325.90271, -0.357130438, -1.71497785e-08, -0.934054494, 3.50728619e-08, 1, -3.17704867e-08, 0.934054494, -4.41061729e-08, -0.357130438))
-					end
-				end
-			end
-		end)
+	   spawn(function()
+	   while wait() do
+		   if DragonScale and Three_World then
+				   if game.Workspace.Enemies:FindFirstChild("Dragon Crew Archer [Lv. 1600]") or game.ReplicatedStorage:FindFirstChild("Dragon Crew Archer [Lv. 1600]") then
+				   if game.Workspace.Enemies:FindFirstChild("Dragon Crew Archer [Lv. 1600]") then
+					   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+					   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+						   if v.Name == "Dragon Crew Archer [Lv. 1600]" and v.Humanoid.Health > 0 then
+							   _G.PosMon = v.HumanoidRootPart.CFrame
+							   StatrMagnet = true
+								   repeat wait(_G.Fast_Delay)
+									   for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+										   if v2:IsA("Tool") then
+											   if tostring(v2.ToolTip) == "Melee" then
+												   _G.Setting_table.Weapon = v2.Name
+											   end
+										   end
+									   end
+									   EquipWeapon(_G.Setting_table.Weapon)
+									   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+									   AttackNoCD()
+								   until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not DragonScale
+							   end
+						   end
+					   end
+				   else
+					   StatrMagnet = false
+					   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+						   if v.Name == "Dragon Crew Archer [Lv. 1600]" then
+							   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+						   end
+					   end
+					   TP2(CFrame.new(6831.1171875, 441.76708984375, 446.58615112305))
+				   end
+			   end
+		   end
+	   end)
 
-	  spawn(function()
-        while wait() do
-            if FishTails1 and Three_World then
-					pcall(function()
-						if game.Workspace.Enemies:FindFirstChild("Fishman Captain [Lv. 1800]") or game.ReplicatedStorage:FindFirstChild("Fishman Captain [Lv. 1800]") then
-						if game.Workspace.Enemies:FindFirstChild("Fishman Captain [Lv. 1800]") or game.Workspace.Enemies:FindFirstChild("Fishman Raider [Lv. 1775]") then
-							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-							for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-								if v.Name == "Fishman Captain [Lv. 1800]" or v.Name == "Fishman Raider [Lv. 1775]" and v.Humanoid.Health > 0 then
-									_G.PosMon = v.HumanoidRootPart.CFrame
-									StatrMagnet = true
-										repeat wait(_G.Fast_Delay)
-											for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-												if v2:IsA("Tool") then
-													if tostring(v2.ToolTip) == "Melee" then
-														_G.Setting_table.Weapon = v2.Name
-													end
-												end
-											end
-											EquipWeapon(_G.Setting_table.Weapon)
-											TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-											AttackNoCD()
-										until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not FishTails1
-									end
-								end
-							end
-						else
-							StatrMagnet = false
-							for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-								if v.Name == "Fishman Captain [Lv. 1800]" then
-									TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-								elseif v.Name == "Fishman Raider [Lv. 1775]" then
-									TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-								end
-							end
-							TP2(CFrame.new(-10892.1299, 331.788452, -8625.25293, 0.979585111, 3.32931229e-08, -0.201029733, -3.29185141e-08, 1, 5.20636778e-09, 0.201029733, 1.51752022e-09, 0.979585111))
-						end
-					end)
-				end
-			end
-		end)
+	 spawn(function()
+	   while wait() do
+		   if FishTails1 and Three_World then
+				   pcall(function()
+					   if game.Workspace.Enemies:FindFirstChild("Fishman Captain [Lv. 1800]") or game.ReplicatedStorage:FindFirstChild("Fishman Captain [Lv. 1800]") then
+					   if game.Workspace.Enemies:FindFirstChild("Fishman Captain [Lv. 1800]") or game.Workspace.Enemies:FindFirstChild("Fishman Raider [Lv. 1775]") then
+						   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+						   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+							   if v.Name == "Fishman Captain [Lv. 1800]" or v.Name == "Fishman Raider [Lv. 1775]" and v.Humanoid.Health > 0 then
+								   _G.PosMon = v.HumanoidRootPart.CFrame
+								   StatrMagnet = true
+									   repeat wait(_G.Fast_Delay)
+										   for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+											   if v2:IsA("Tool") then
+												   if tostring(v2.ToolTip) == "Melee" then
+													   _G.Setting_table.Weapon = v2.Name
+												   end
+											   end
+										   end
+										   EquipWeapon(_G.Setting_table.Weapon)
+										   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+										   AttackNoCD()
+									   until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not FishTails1
+								   end
+							   end
+						   end
+					   else
+						   StatrMagnet = false
+						   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+							   if v.Name == "Fishman Captain [Lv. 1800]" then
+								   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+							   elseif v.Name == "Fishman Raider [Lv. 1775]" then
+								   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+							   end
+						   end
+						   TP2(CFrame.new(-10789.401367188, 427.18637084961, -9131.4423828125))
+						   task.wait(.5)
+						   TP2(CFrame.new(-10553.268554688, 521.38439941406, -8176.9458007813))
+					   end
+				   end)
+			   end
+		   end
+	   end)
 
-	    spawn(function()
-        while wait() do
-            if FishTails and Old_World then
-				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
-					pcall(function()
-						if game.Workspace.Enemies:FindFirstChild("Fishman Warrior [Lv. 375]") or game.ReplicatedStorage:FindFirstChild("Fishman Warrior [Lv. 375]") then
-						if game.Workspace.Enemies:FindFirstChild("Fishman Warrior [Lv. 375]") then
-							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-							for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-								if v.Name == "Fishman Warrior [Lv. 375]" and v.Humanoid.Health > 0 then
-									_G.PosMon = v.HumanoidRootPart.CFrame
-									StatrMagnet = true
-										repeat wait(_G.Fast_Delay)
-											for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-												if v2:IsA("Tool") then
-													if tostring(v2.ToolTip) == "Melee" then
-														_G.Setting_table.Weapon = v2.Name
-													end
-												end
-											end
-											EquipWeapon(_G.Setting_table.Weapon)
-											TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-											AttackNoCD()
-										until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not FishTails
-									end
-								end
-							end
-						else
-							StatrMagnet = false
-							for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-								if v.Name == "Fishman Warrior [Lv. 375]" then
-									TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-								end
-							end
-							TP2(CFrame.new(60946.6094, 48.6735229, 1525.91687, -0.0817126185, 8.90751153e-08, 0.996655822, 2.00889794e-08, 1, -8.77269599e-08, -0.996655822, 1.28533992e-08, -0.0817126185))
-							task.wait(4)
-						end
-					end)
-				end
-			end
-		end)
+	   spawn(function()
+	   while wait() do
+		   if FishTails and Old_World then
+			   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
+				   pcall(function()
+					   if game.Workspace.Enemies:FindFirstChild("Fishman Warrior [Lv. 375]") or game.ReplicatedStorage:FindFirstChild("Fishman Warrior [Lv. 375]") then
+					   if game.Workspace.Enemies:FindFirstChild("Fishman Warrior [Lv. 375]") then
+						   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+						   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+							   if v.Name == "Fishman Warrior [Lv. 375]" and v.Humanoid.Health > 0 then
+								   _G.PosMon = v.HumanoidRootPart.CFrame
+								   StatrMagnet = true
+									   repeat wait(_G.Fast_Delay)
+										   for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+											   if v2:IsA("Tool") then
+												   if tostring(v2.ToolTip) == "Melee" then
+													   _G.Setting_table.Weapon = v2.Name
+												   end
+											   end
+										   end
+										   EquipWeapon(_G.Setting_table.Weapon)
+										   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+										   AttackNoCD()
+									   until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not FishTails
+								   end
+							   end
+						   end
+					   else
+						   StatrMagnet = false
+						   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+							   if v.Name == "Fishman Warrior [Lv. 375]" then
+								   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+							   end
+						   end
+						   TP2(CFrame.new(60844.10546875, 98.462875366211, 1298.3985595703))
+						   task.wait()
+					   end
+				   end)
+			   end
+		   end
+	   end)
 
-Quest_Tab:Label("New World")
+--Quest_Tab:Label("New World")
 
-	Quest_Tab:Toggle("Auto Magma Ore [Sea 1 and Sea 2]","9610159123",_G.Setting_table.Ore,function(vu)
-		Ore1 = vu
-	    Ore = vu
-		_G.Setting_table.Ore = vu
-		Update_Setting(getgenv()['MyName'])
-	  end)
+if New_World then
 
-	Quest_Tab:Toggle("Auto Mystic [Sea 2]","9610159123",_G.Setting_table.Mystic,function(vu)
-		Mystic = vu
-		_G.Setting_table.Mystic = vu
-		Update_Setting(getgenv()['MyName'])
+   Quest_Tab:Toggle("Auto Magma Ore [Sea 2]","9610159123",_G.Setting_table.Ore,function(vu)
+	   Ore1 = vu
+	   _G.Setting_table.Ore = vu
+	   Update_Setting(getgenv()['MyName'])
 	 end)
 
-	Quest_Tab:Toggle("Auto Radioactive Material [Sea 2]","9610159123",_G.Setting_table.Radio,function(vu)
-		Radio = vu
-		_G.Setting_table.Radio = vu
-		Update_Setting(getgenv()['MyName'])
+   Quest_Tab:Toggle("Auto Mystic [Sea 2]","9610159123",_G.Setting_table.Mystic,function(vu)
+	   Mystic = vu
+	   _G.Setting_table.Mystic = vu
+	   Update_Setting(getgenv()['MyName'])
 	end)
 
-	Quest_Tab:Toggle("Auto Vampire Fang [Sea 2]","9610159123",_G.Setting_table.vamp,function(vu)
-		vamp = vu
-		_G.Setting_table.vamp = vu
-		Update_Setting(getgenv()['MyName'])
-	end)
+   Quest_Tab:Toggle("Auto Radioactive [Sea 2]","9610159123",_G.Setting_table.Radio,function(vu)
+	   Radio = vu
+	   _G.Setting_table.Radio = vu
+	   Update_Setting(getgenv()['MyName'])
+   end)
 
-Quest_Tab:Label("Old World")
+   Quest_Tab:Toggle("Auto Vampire Fang [Sea 2]","9610159123",_G.Setting_table.vamp,function(vu)
+	   vamp = vu
+	   _G.Setting_table.vamp = vu
+	   Update_Setting(getgenv()['MyName'])
+   end)
 
-	Quest_Tab:Toggle("Auto Angel Wings [Sea 1]","9610159123",_G.Setting_table.Angel,function(vu)
-		Angel = vu
-		_G.Setting_table.Angel = vu
-		Update_Setting(getgenv()['MyName'])
-	end)
+   Quest_Tab:Toggle("Auto Leather And Scrap Metal [Sea 2]","9610159123",_G.Setting_table.Leather,function(vu)
+	   Leather1 = vu
+	   _G.Setting_table.Leather = vu
+	   Update_Setting(getgenv()['MyName'])
+   
+	   end)
+end
 
-	    spawn(function()
-        while wait() do
-            if Ore and Old_World then
-                pcall(function()
-					if game.Workspace.Enemies:FindFirstChild("Military Soldier [Lv. 300]") or game.ReplicatedStorage:FindFirstChild("Military Soldier [Lv. 300]") then
-					if game.Workspace.Enemies:FindFirstChild("Military Soldier [Lv. 300]") or game.Workspace.Enemies:FindFirstChild("Military Spy [Lv. 325]") then
-						for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-							if v.Name == "Military Soldier [Lv. 300]" or v.Name == "Military Spy [Lv. 325]" and v.Humanoid.Health > 0 then
-								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-								_G.PosMon = v.HumanoidRootPart.CFrame
-								StatrMagnet = true
-									repeat wait(_G.Fast_Delay)
-										for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-											if v2:IsA("Tool") then
-												if tostring(v2.ToolTip) == "Melee" then
-													_G.Setting_table.Weapon = v2.Name
-												end
-											end
-										end
-										EquipWeapon(_G.Setting_table.Weapon)
-										TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-										AttackNoCD()
-									until v.Humanoid.Health <= 0 or not v.Parent or not Ore
-								end
-							end
-						end
-					else
-						StatrMagnet = false
-						for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-							if v.Name == "Military Soldier [Lv. 300]" then
-								TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-							elseif v.Name == "Military Spy [Lv. 325]" then
-								TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-							end
-						end
-						TP2(CFrame.new(-5313.37012, 10.9500084, 8515.29395, -0.499959469, 0, 0.866048813, 0, 1, 0, -0.866048813, 0, -0.499959469))
-					end
-				end)
-			end
-		end
-	end)
+--Quest_Tab:Label("Old World")
 
-	spawn(function()
-        while wait() do
-            if Ore1 and New_World then
-				pcall(function()
-					if game.Workspace.Enemies:FindFirstChild("Lava Pirate [Lv. 1200]") or game.ReplicatedStorage:FindFirstChild("Lava Pirate [Lv. 1200]") then
-					if game.Workspace.Enemies:FindFirstChild("Lava Pirate [Lv. 1200]") or game.Workspace.Enemies:FindFirstChild("Magma Ninja [Lv. 1175]") then
-						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-						for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-							if v.Name == "Lava Pirate [Lv. 1200]" or v.Name == "Magma Ninja [Lv. 1175]" and v.Humanoid.Health > 0 then
-								_G.PosMon = v.HumanoidRootPart.CFrame
-								StatrMagnet = true
-									repeat wait(_G.Fast_Delay)
-										for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-											if v2:IsA("Tool") then
-												if tostring(v2.ToolTip) == "Melee" then
-													_G.Setting_table.Weapon = v2.Name
-												end
-											end
-										end
-										EquipWeapon(_G.Setting_table.Weapon)
-										TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-										AttackNoCD()
-									until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not Ore1
-								end
-							end
-						end
-					else
-						StatrMagnet = false
-						for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-							if v.Name == "Lava Pirate [Lv. 1200]" then
-								TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-							elseif v.Name == "Magma Ninja [Lv. 1175]" then
-									TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-							end
-						end
-						TP2(CFrame.new(-5523.16162109375, 18.34795379638672, -5243.0654296875))
-					end
-				end)
-			end
-		end
-	end)
+if Old_World then
 
-	spawn(function()
-        while wait() do
-            if Mystic and New_World then
-				pcall(function()
-					if game.Workspace.Enemies:FindFirstChild("Water Fighter [Lv. 1450]") or game.ReplicatedStorage:FindFirstChild("Water Fighter [Lv. 1450]") then
-					if game.Workspace.Enemies:FindFirstChild("Water Fighter [Lv. 1450]") then
-						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-						for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-							if v.Name == "Water Fighter [Lv. 1450]" and v.Humanoid.Health > 0 then
-								_G.PosMon = v.HumanoidRootPart.CFrame
-								StatrMagnet = true
-									repeat wait(_G.Fast_Delay)
-										for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-											if v2:IsA("Tool") then
-												if tostring(v2.ToolTip) == "Melee" then
-													_G.Setting_table.Weapon = v2.Name
-												end
-											end
-										end
-										EquipWeapon(_G.Setting_table.Weapon)
-										TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-										AttackNoCD()
-									until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not Mystic
-								end
-							end
-						end
-					else
-						StatrMagnet = false
-						for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-							if v.Name == "Water Fighter [Lv. 1450]" then
-								TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-							end
-						end
-						TP2(CFrame.new(-3054.44458, 235.544281, -10142.8193, 0.990270376, -0, -0.13915664, 0, 1, -0, 0.13915664, 0, 0.990270376))
-					end
-				end)
-			end
-		end
-	end)
-               spawn(function()
-                while wait() do
-                    if demonic and Three_World then
-						pcall(function()
-							if game.Workspace.Enemies:FindFirstChild("Demonic Soul [Lv. 2025]") or game.ReplicatedStorage:FindFirstChild("Demonic Soul [Lv. 2025]") then
-							if game.Workspace.Enemies:FindFirstChild("Demonic Soul [Lv. 2025]") then
-								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-								for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-									if v.Name == "Demonic Soul [Lv. 2025]" and v.Humanoid.Health > 0 then
-										_G.PosMon = v.HumanoidRootPart.CFrame
-										StatrMagnet = true
-											repeat wait(_G.Fast_Delay)
-												for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-													if v2:IsA("Tool") then
-														if tostring(v2.ToolTip) == "Melee" then
-															_G.Setting_table.Weapon = v2.Name
-														end
-													end
-												end
-												EquipWeapon(_G.Setting_table.Weapon)
-												TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-												AttackNoCD()
-											until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not demonic
-										end
-									end
-								end
-							else
-								StatrMagnet = false
-								for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-									if v.Name == "Demonic Soul [Lv. 2025]" then
-										TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-									end
-								end
-								TP2(CFrame.new(-9516.99316, 172.017181, 6078.46533, 0, 0, -1, 0, 1, 0, 1, 0, 0))
-							end
-						end)
-					end
-				end
-			end)
-               spawn(function()
-                while wait() do
-                    if powder and Three_World then
-						pcall(function()
-							if game.Workspace.Enemies:FindFirstChild("Pistol Billionaire [Lv. 1525]") or game.ReplicatedStorage:FindFirstChild("Pistol Billionaire [Lv. 1525]") then
-							if game.Workspace.Enemies:FindFirstChild("Pistol Billionaire [Lv. 1525]") then
-								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-								for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-									if v.Name == "Pistol Billionaire [Lv. 1525]" and v.Humanoid.Health > 0 then
-										_G.PosMon = v.HumanoidRootPart.CFrame
-										StatrMagnet = true
-											repeat wait(_G.Fast_Delay)
-												for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-													if v2:IsA("Tool") then
-														if tostring(v2.ToolTip) == "Melee" then
-															_G.Setting_table.Weapon = v2.Name
-														end
-													end
-												end
-												EquipWeapon(_G.Setting_table.Weapon)
-												TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-												AttackNoCD()
-											until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not powder
-										end
-									end
-								end
-							else
-								StatrMagnet = false
-								for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-									if v.Name == "Pistol Billionaire [Lv. 1525]" then
-										TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-									end
-								end
-								TP2(CFrame.new(-290.074677, 42.9034653, 5581.58984, 0.965929627, -0, -0.258804798, 0, 1, -0, 0.258804798, 0, 0.965929627))
-							end
-						end)
-					end
-				end
-			end)
-               spawn(function()
-                while wait() do
-                    if Tusk and Three_World then
-						pcall(function()
-							if game.Workspace.Enemies:FindFirstChild("Mythological Pirate [Lv. 1850]") or game.ReplicatedStorage:FindFirstChild("Mythological Pirate [Lv. 1850]") then
-							if game.Workspace.Enemies:FindFirstChild("Mythological Pirate [Lv. 1850]") then
-								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-								for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-									if v.Name == "Mythological Pirate [Lv. 1850]" and v.Humanoid.Health > 0 then
-										_G.PosMon = v.HumanoidRootPart.CFrame
-										StatrMagnet = true
-											repeat wait(_G.Fast_Delay)
-												for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-													if v2:IsA("Tool") then
-														if tostring(v2.ToolTip) == "Melee" then
-															_G.Setting_table.Weapon = v2.Name
-														end
-													end
-												end
-												EquipWeapon(_G.Setting_table.Weapon)
-												TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-												AttackNoCD()
-											until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not Tusk
-										end
-									end
-								end
-							else
-								StatrMagnet = false
-								for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-									if v.Name == "Mythological Pirate [Lv. 1850]" then
-										TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-									end
-								end
-								TP2(CFrame.new(-13234.04, 331.488495, -7625.40137, 0.707134247, -0, -0.707079291, 0, 1, -0, 0.707079291, 0, 0.707134247))
-							end
-						end)
-					end
-				end
-			end)
-               spawn(function()
-                while wait() do
-                    if vamp and New_World then
-						pcall(function()
-							if game.Workspace.Enemies:FindFirstChild("Vampire [Lv. 975]") or game.ReplicatedStorage:FindFirstChild("Vampire [Lv. 975]") then
-							if game.Workspace.Enemies:FindFirstChild("Vampire [Lv. 975]") then
-								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-								for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-									if v.Name == "Vampire [Lv. 975]" and v.Humanoid.Health > 0 then
-										_G.PosMon = v.HumanoidRootPart.CFrame
-										StatrMagnet = true
-											repeat wait(_G.Fast_Delay)
-												for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-													if v2:IsA("Tool") then
-														if tostring(v2.ToolTip) == "Melee" then
-															_G.Setting_table.Weapon = v2.Name
-														end
-													end
-												end
-												EquipWeapon(_G.Setting_table.Weapon)
-												TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-												AttackNoCD()
-											until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not vamp
-										end
-									end
-								end
-							else
-								StatrMagnet = false
-								for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-									if v.Name == "Vampire [Lv. 975]" then
-										TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-									end
-								end
-								TP2(CFrame.new(-5497.06152, 47.5923004, -795.237061, -0.29242146, 0, -0.95628953, 0, 1, 0, 0.95628953, 0, -0.29242146))
-							end
-						end)
-					end
-				end
-			end)
-               spawn(function()
-                while wait() do
-                    if Radio and New_World then
-						pcall(function()
-							if game.Workspace.Enemies:FindFirstChild("Factory Staff [Lv. 800]") or game.ReplicatedStorage:FindFirstChild("Factory Staff [Lv. 800]") then
-							if game.Workspace.Enemies:FindFirstChild("Factory Staff [Lv. 800]") then
-								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-								for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-									if v.Name == "Factory Staff [Lv. 800]" and v.Humanoid.Health > 0 then
-										_G.PosMon = v.HumanoidRootPart.CFrame
-										StatrMagnet = true
-											repeat wait(_G.Fast_Delay)
-												for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-													if v2:IsA("Tool") then
-														if tostring(v2.ToolTip) == "Melee" then
-															_G.Setting_table.Weapon = v2.Name
-														end
-													end
-												end
-												EquipWeapon(_G.Setting_table.Weapon)
-												TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-												AttackNoCD()
-											until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not Radio
-										end
-									end
-								end
-							else
-								StatrMagnet = false
-								for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-									if v.Name == "Factory Staff [Lv. 800]" then
-										TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-									end
-								end
-								TP2(CFrame.new(632.698608, 73.1055908, 918.666321, -0.0319722369, 8.96074881e-10, -0.999488771, 1.36326533e-10, 1, 8.92172336e-10, 0.999488771, -1.07732087e-10, -0.0319722369))
-							end
-						end)
-					end
-				end
-			end)
+   Quest_Tab:Toggle("Auto Magma Ore [Sea 1]","9610159123",_G.Setting_table.Ore,function(vu)
+	   Ore = vu
+	   _G.Setting_table.Ore = vu
+	   Update_Setting(getgenv()['MyName'])
+	 end)
+
+   Quest_Tab:Toggle("Auto Fish Tails [Sea 1]","9610159123",_G.Setting_table.FishTails,function(vu)
+	   FishTails = vu
+	   _G.Setting_table.FishTails = vu
+	   Update_Setting(getgenv()['MyName'])
+   
+	   end)
+
+	   Quest_Tab:Toggle("Auto Angel Wings [Sea 1]","9610159123",_G.Setting_table.Angel,function(vu)
+		   Angel = vu
+		   _G.Setting_table.Angel = vu
+		   Update_Setting(getgenv()['MyName'])
+	   end)
+
+	   Quest_Tab:Toggle("Auto Leather And Scrap Metal [Sea 1]","9610159123",_G.Setting_table.Leather,function(vu)
+		   Leather2 = vu
+		   _G.Setting_table.Leather = vu
+		   Update_Setting(getgenv()['MyName'])
+	   
+		   end)
+end
+
 	   spawn(function()
-        while wait() do
-            if Angel and Old_World then
-				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-4626.99853515625, 867.7423095703125, -1702.372314453125))
-				task.wait(2.3)
-				TP2(CFrame.new(-7839.9658203125, 5608.88037109375, -1611.296875))
-				pcall(function()
-					if game.Workspace.Enemies:FindFirstChild("God's Guard [Lv. 450]") or game.ReplicatedStorage:FindFirstChild("Royal Squad [Lv. 525]") or game:GetService("Workspace").Enemies:FindFirstChild("Shanda [Lv. 475]") or game:GetService("Workspace").Enemies:FindFirstChild("Royal Soldier [Lv. 550]") then
-					if game.Workspace.Enemies:FindFirstChild("God's Guard [Lv. 450]") or game.Workspace.Enemies:FindFirstChild("Royal Squad [Lv. 525]") or game.Workspace.Enemies:FindFirstChild("Shanda [Lv. 475]") or game.Workspace.Enemies:FindFirstChild("Royal Soldier [Lv. 550]") then
-						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-						for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-							if v.Name == "God's Guard [Lv. 450]" or v.Name == "Shanda [Lv. 475]" or v.Name == "Royal Soldier [Lv. 550]" and v.Humanoid.Health > 0 then
-								_G.PosMon = v.HumanoidRootPart.CFrame
-								StatrMagnet = true
-									repeat wait(_G.Fast_Delay)
-										for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-											if v2:IsA("Tool") then
-												if tostring(v2.ToolTip) == "Melee" then
-													_G.Setting_table.Weapon = v2.Name
-												end
-											end
-										end
-										EquipWeapon(_G.Setting_table.Weapon)
-										TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-										AttackNoCD()
-									until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not Angel
-								end
-							end
-						end
-					else
-						StatrMagnet = false
-						for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-							if v.Name == "God's Guard [Lv. 450]" then
-								TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-							elseif v.Name == "Shanda [Lv. 475]" then
-								TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-							elseif v.Name == "Royal Soldier [Lv. 550]" then
-								TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-							end
-						end
-						TP(CFrame.new(-7859.09814, 5544.19043, -381.476196, -0.422592998, 0, 0.906319618, 0, 1, 0, -0.906319618, 0, -0.422592998))
-					end
-				end)
-			end
-		end
-	end)
-	    spawn(function()
-        while wait() do
-            if Leather and Three_World then
-				pcall(function()
-					if game.Workspace.Enemies:FindFirstChild("Jungle Pirate [Lv. 1900]") or game.ReplicatedStorage:FindFirstChild("Jungle Pirate [Lv. 1900]") then
-						if game.Workspace.Enemies:FindFirstChild("Jungle Pirate [Lv. 1900]") then
-							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-							for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-								if v.Name == "Jungle Pirate [Lv. 1900]" and v.Humanoid.Health > 0 then
-									_G.PosMon = v.HumanoidRootPart.CFrame
-									StatrMagnet = true
-										repeat wait(_G.Fast_Delay)
-											for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-												if v2:IsA("Tool") then
-													if tostring(v2.ToolTip) == "Melee" then
-														_G.Setting_table.Weapon = v2.Name
-													end
-												end
-											end
-											EquipWeapon(_G.Setting_table.Weapon)
-											TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-											AttackNoCD()
-										until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not Leather
-									end
-								end
-							end
-						else
-							StatrMagnet = false
-							for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-								if v.Name == "Jungle Pirate [Lv. 1900]" then
-									TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-								end
-							end
-							TP2(CFrame.new(-11936.5166015625, 331.7640686035156, -10644.6494140625))
-						end
-					end)
-				end
-			end
-		end)
-		   spawn(function()
-        while wait() do
-            if Leather1 and New_World then
-				pcall(function() 
-				if game.Workspace.Enemies:FindFirstChild("Swan Pirate [Lv. 775]") or game.ReplicatedStorage:FindFirstChild("Swan Pirate [Lv. 775]") then
-					if game.Workspace.Enemies:FindFirstChild("Swan Pirate [Lv. 775]") then
-						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-						for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-							if v.Name == "Swan Pirate [Lv. 775]" and v.Humanoid.Health > 0 then
-								_G.PosMon = v.HumanoidRootPart.CFrame
-								StatrMagnet = true
-									repeat wait(_G.Fast_Delay)
-										for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-											if v2:IsA("Tool") then
-												if tostring(v2.ToolTip) == "Melee" then
-													_G.Setting_table.Weapon = v2.Name
-												end
-											end
-										end
-										EquipWeapon(_G.Setting_table.Weapon)
-										TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-										AttackNoCD()
-									until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not Leather1
-								end
-							end
-						end
-					else
-						StatrMagnet = false
-						for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-							if v.Name == "Swan Pirate [Lv. 775]" then
-								TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-							end
-						end
-						TP2(CFrame.new(638.43811, 71.769989, 918.282898, 0.139203906, 0, 0.99026376, 0, 1, 0, -0.99026376, 0, 0.139203906))
-					end
-				end)
-			end
-		end
-	end)
+	   while wait() do
+		   if Ore and Old_World then
+			   pcall(function()
+				   if game.Workspace.Enemies:FindFirstChild("Military Soldier [Lv. 300]") or game.ReplicatedStorage:FindFirstChild("Military Soldier [Lv. 300]") then
+				   if game.Workspace.Enemies:FindFirstChild("Military Soldier [Lv. 300]") or game.Workspace.Enemies:FindFirstChild("Military Spy [Lv. 325]") then
+					   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+						   if v.Name == "Military Soldier [Lv. 300]" or v.Name == "Military Spy [Lv. 325]" and v.Humanoid.Health > 0 then
+							   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+							   _G.PosMon = v.HumanoidRootPart.CFrame
+							   StatrMagnet = true
+								   repeat wait(_G.Fast_Delay)
+									   for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+										   if v2:IsA("Tool") then
+											   if tostring(v2.ToolTip) == "Melee" then
+												   _G.Setting_table.Weapon = v2.Name
+											   end
+										   end
+									   end
+									   EquipWeapon(_G.Setting_table.Weapon)
+									   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+									   AttackNoCD()
+								   until v.Humanoid.Health <= 0 or not v.Parent or not Ore
+							   end
+						   end
+					   end
+				   else
+					   StatrMagnet = false
+					   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+						   if v.Name == "Military Soldier [Lv. 300]" then
+							   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+						   elseif v.Name == "Military Spy [Lv. 325]" then
+							   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+						   end
+					   end
+					   TP2(CFrame.new(-5369.0004882813, 61.24352645874, 8556.4921875))
+					   wait(0.5)
+					   TP2(CFrame.new(-5984.0532226563, 82.14656829834, 8753.326171875))
+				   end
+			   end)
+		   end
+	   end
+   end)
 
-	spawn(function()
-        while wait() do
-            if Leather2 and Old_World then
-				TP2(CFrame.new(-1141.07483, 4.10001802, 3831.5498, 0.965929627, -0, -0.258804798, 0, 1, -0, 0.258804798, 0, 0.965929627))
-				pcall(function()
-					if game.Workspace.Enemies:FindFirstChild("Brute [Lv. 45]") or game.ReplicatedStorage:FindFirstChild("Brute [Lv. 45]") then
-					if game.Workspace.Enemies:FindFirstChild("Brute [Lv. 45]") then
-						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-						for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-							if v.Name == "Brute [Lv. 45]" and v.Humanoid.Health > 0 then
-								_G.PosMon = v.HumanoidRootPart.CFrame
-								StatrMagnet = true
-									repeat wait(_G.Fast_Delay)
-										for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-											if v2:IsA("Tool") then
-												if tostring(v2.ToolTip) == "Melee" then
-													_G.Setting_table.Weapon = v2.Name
-												end
-											end
-										end
-										EquipWeapon(_G.Setting_table.Weapon)
-										TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-										AttackNoCD()
-									until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not Leather2
-								end
-							end
-						end
-					else
-						StatrMagnet = false
-						for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-							if v.Name == "Brute [Lv. 45]" then
-								TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
-							end
-						end
-						TP2(CFrame.new(-1141.07483, 4.10001802, 3831.5498, 0.965929627, -0, -0.258804798, 0, 1, -0, 0.258804798, 0, 0.965929627))
-					end
-				end)
-			end
-		end
-	end)
+   spawn(function()
+	   while wait() do
+		   if Ore1 and New_World then
+			   pcall(function()
+				   if game.Workspace.Enemies:FindFirstChild("Lava Pirate [Lv. 1200]") or game.ReplicatedStorage:FindFirstChild("Lava Pirate [Lv. 1200]") then
+				   if game.Workspace.Enemies:FindFirstChild("Lava Pirate [Lv. 1200]") or game.Workspace.Enemies:FindFirstChild("Magma Ninja [Lv. 1175]") then
+					   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+					   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+						   if v.Name == "Lava Pirate [Lv. 1200]" or v.Name == "Magma Ninja [Lv. 1175]" and v.Humanoid.Health > 0 then
+							   _G.PosMon = v.HumanoidRootPart.CFrame
+							   StatrMagnet = true
+								   repeat wait(_G.Fast_Delay)
+									   for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+										   if v2:IsA("Tool") then
+											   if tostring(v2.ToolTip) == "Melee" then
+												   _G.Setting_table.Weapon = v2.Name
+											   end
+										   end
+									   end
+									   EquipWeapon(_G.Setting_table.Weapon)
+									   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+									   AttackNoCD()
+								   until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not Ore1
+							   end
+						   end
+					   end
+				   else
+					   StatrMagnet = false
+					   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+						   if v.Name == "Lava Pirate [Lv. 1200]" then
+							   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+						   elseif v.Name == "Magma Ninja [Lv. 1175]" then
+								   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+						   end
+					   end
+					   TP2(CFrame.new(-5461.8388671875, 130.36347961426, -5836.4702148438))
+					   wait(.5)
+					   TP2(CFrame.new(-5251.1889648438, 55.164535522461, -4774.4096679688))
+				   end
+			   end)
+		   end
+	   end
+   end)
+
+   spawn(function()
+	   while wait() do
+		   if Mystic and New_World then
+			   pcall(function()
+				   if game.Workspace.Enemies:FindFirstChild("Water Fighter [Lv. 1450]") or game.ReplicatedStorage:FindFirstChild("Water Fighter [Lv. 1450]") then
+				   if game.Workspace.Enemies:FindFirstChild("Water Fighter [Lv. 1450]") then
+					   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+					   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+						   if v.Name == "Water Fighter [Lv. 1450]" and v.Humanoid.Health > 0 then
+							   _G.PosMon = v.HumanoidRootPart.CFrame
+							   StatrMagnet = true
+								   repeat wait(_G.Fast_Delay)
+									   for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+										   if v2:IsA("Tool") then
+											   if tostring(v2.ToolTip) == "Melee" then
+												   _G.Setting_table.Weapon = v2.Name
+											   end
+										   end
+									   end
+									   EquipWeapon(_G.Setting_table.Weapon)
+									   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+									   AttackNoCD()
+								   until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not Mystic
+							   end
+						   end
+					   end
+				   else
+					   StatrMagnet = false
+					   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+						   if v.Name == "Water Fighter [Lv. 1450]" then
+							   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+						   end
+					   end
+					   TP2(CFrame.new(-3262.9301757813, 298.69036865234, -10552.529296875))
+				   end
+			   end)
+		   end
+	   end
+   end)
+			  spawn(function()
+			   while wait() do
+				   if demonic and Three_World then
+					   pcall(function()
+						   if game.Workspace.Enemies:FindFirstChild("Demonic Soul [Lv. 2025]") or game.ReplicatedStorage:FindFirstChild("Demonic Soul [Lv. 2025]") then
+						   if game.Workspace.Enemies:FindFirstChild("Demonic Soul [Lv. 2025]") then
+							   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+							   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+								   if v.Name == "Demonic Soul [Lv. 2025]" and v.Humanoid.Health > 0 then
+									   _G.PosMon = v.HumanoidRootPart.CFrame
+									   StatrMagnet = true
+										   repeat wait(_G.Fast_Delay)
+											   for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+												   if v2:IsA("Tool") then
+													   if tostring(v2.ToolTip) == "Melee" then
+														   _G.Setting_table.Weapon = v2.Name
+													   end
+												   end
+											   end
+											   EquipWeapon(_G.Setting_table.Weapon)
+											   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+											   AttackNoCD()
+										   until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not demonic
+									   end
+								   end
+							   end
+						   else
+							   StatrMagnet = false
+							   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+								   if v.Name == "Demonic Soul [Lv. 2025]" then
+									   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+								   end
+							   end
+							   TP2(CFrame.new(-9709.30762, 204.695892, 6044.04688))
+						   end
+					   end)
+				   end
+			   end
+		   end)
+			  spawn(function()
+			   while wait() do
+				   if powder and Three_World then
+					   pcall(function()
+						   if game.Workspace.Enemies:FindFirstChild("Pistol Billionaire [Lv. 1525]") or game.ReplicatedStorage:FindFirstChild("Pistol Billionaire [Lv. 1525]") then
+						   if game.Workspace.Enemies:FindFirstChild("Pistol Billionaire [Lv. 1525]") then
+							   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+							   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+								   if v.Name == "Pistol Billionaire [Lv. 1525]" and v.Humanoid.Health > 0 then
+									   _G.PosMon = v.HumanoidRootPart.CFrame
+									   StatrMagnet = true
+										   repeat wait(_G.Fast_Delay)
+											   for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+												   if v2:IsA("Tool") then
+													   if tostring(v2.ToolTip) == "Melee" then
+														   _G.Setting_table.Weapon = v2.Name
+													   end
+												   end
+											   end
+											   EquipWeapon(_G.Setting_table.Weapon)
+											   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+											   AttackNoCD()
+										   until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not powder
+									   end
+								   end
+							   end
+						   else
+							   StatrMagnet = false
+							   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+								   if v.Name == "Pistol Billionaire [Lv. 1525]" then
+									   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+								   end
+							   end
+							   TP2(CFrame.new(-236.53652954102, 217.46676635742, 6006.0883789063))
+						   end
+					   end)
+				   end
+			   end
+		   end)
+			  spawn(function()
+			   while wait() do
+				   if Tusk and Three_World then
+					   pcall(function()
+						   if game.Workspace.Enemies:FindFirstChild("Mythological Pirate [Lv. 1850]") or game.ReplicatedStorage:FindFirstChild("Mythological Pirate [Lv. 1850]") then
+						   if game.Workspace.Enemies:FindFirstChild("Mythological Pirate [Lv. 1850]") then
+							   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+							   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+								   if v.Name == "Mythological Pirate [Lv. 1850]" and v.Humanoid.Health > 0 then
+									   _G.PosMon = v.HumanoidRootPart.CFrame
+									   StatrMagnet = true
+										   repeat wait(_G.Fast_Delay)
+											   for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+												   if v2:IsA("Tool") then
+													   if tostring(v2.ToolTip) == "Melee" then
+														   _G.Setting_table.Weapon = v2.Name
+													   end
+												   end
+											   end
+											   EquipWeapon(_G.Setting_table.Weapon)
+											   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+											   AttackNoCD()
+										   until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not Tusk
+									   end
+								   end
+							   end
+						   else
+							   StatrMagnet = false
+							   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+								   if v.Name == "Mythological Pirate [Lv. 1850]" then
+									   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+								   end
+							   end
+							   TP2(CFrame.new(-13508.616210938, 582.46228027344, -6985.3037109375))
+						   end
+					   end)
+				   end
+			   end
+		   end)
+			  spawn(function()
+			   while wait() do
+				   if vamp and New_World then
+					   pcall(function()
+						   if game.Workspace.Enemies:FindFirstChild("Vampire [Lv. 975]") or game.ReplicatedStorage:FindFirstChild("Vampire [Lv. 975]") then
+						   if game.Workspace.Enemies:FindFirstChild("Vampire [Lv. 975]") then
+							   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+							   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+								   if v.Name == "Vampire [Lv. 975]" and v.Humanoid.Health > 0 then
+									   _G.PosMon = v.HumanoidRootPart.CFrame
+									   StatrMagnet = true
+										   repeat wait(_G.Fast_Delay)
+											   for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+												   if v2:IsA("Tool") then
+													   if tostring(v2.ToolTip) == "Melee" then
+														   _G.Setting_table.Weapon = v2.Name
+													   end
+												   end
+											   end
+											   EquipWeapon(_G.Setting_table.Weapon)
+											   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+											   AttackNoCD()
+										   until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not vamp
+									   end
+								   end
+							   end
+						   else
+							   StatrMagnet = false
+							   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+								   if v.Name == "Vampire [Lv. 975]" then
+									   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+								   end
+							   end
+							   TP2(CFrame.new(-5806.1098632813, 16.722528457642, -1164.4384765625))
+						   end
+					   end)
+				   end
+			   end
+		   end)
+			  spawn(function()
+			   while wait() do
+				   if Radio and New_World then
+					   pcall(function()
+						   if game.Workspace.Enemies:FindFirstChild("Factory Staff [Lv. 800]") or game.ReplicatedStorage:FindFirstChild("Factory Staff [Lv. 800]") then
+						   if game.Workspace.Enemies:FindFirstChild("Factory Staff [Lv. 800]") then
+							   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+							   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+								   if v.Name == "Factory Staff [Lv. 800]" and v.Humanoid.Health > 0 then
+									   _G.PosMon = v.HumanoidRootPart.CFrame
+									   StatrMagnet = true
+										   repeat wait(_G.Fast_Delay)
+											   for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+												   if v2:IsA("Tool") then
+													   if tostring(v2.ToolTip) == "Melee" then
+														   _G.Setting_table.Weapon = v2.Name
+													   end
+												   end
+											   end
+											   EquipWeapon(_G.Setting_table.Weapon)
+											   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+											   AttackNoCD()
+										   until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not Radio
+									   end
+								   end
+							   end
+						   else
+							   StatrMagnet = false
+							   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+								   if v.Name == "Factory Staff [Lv. 800]" then
+									   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+								   end
+							   end
+							   TP2(CFrame.new(533.22045898438, 128.46876525879, 355.62615966797))
+						   end
+					   end)
+				   end
+			   end
+		   end)
+	  spawn(function()
+	   while wait() do
+		   if Angel and Old_World then
+			   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-4626.99853515625, 867.7423095703125, -1702.372314453125))
+			   task.wait(2.3)
+			   TP2(CFrame.new(-7839.9658203125, 5608.88037109375, -1611.296875))
+			   pcall(function()
+				   if game.Workspace.Enemies:FindFirstChild("God's Guard [Lv. 450]") or game.ReplicatedStorage:FindFirstChild("Royal Squad [Lv. 525]") or game:GetService("Workspace").Enemies:FindFirstChild("Shanda [Lv. 475]") or game:GetService("Workspace").Enemies:FindFirstChild("Royal Soldier [Lv. 550]") then
+				   if game.Workspace.Enemies:FindFirstChild("God's Guard [Lv. 450]") or game.Workspace.Enemies:FindFirstChild("Royal Squad [Lv. 525]") or game.Workspace.Enemies:FindFirstChild("Shanda [Lv. 475]") or game.Workspace.Enemies:FindFirstChild("Royal Soldier [Lv. 550]") then
+					   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+					   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+						   if v.Name == "God's Guard [Lv. 450]" or v.Name == "Shanda [Lv. 475]" or v.Name == "Royal Soldier [Lv. 550]" and v.Humanoid.Health > 0 then
+							   _G.PosMon = v.HumanoidRootPart.CFrame
+							   StatrMagnet = true
+								   repeat wait(_G.Fast_Delay)
+									   for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+										   if v2:IsA("Tool") then
+											   if tostring(v2.ToolTip) == "Melee" then
+												   _G.Setting_table.Weapon = v2.Name
+											   end
+										   end
+									   end
+									   EquipWeapon(_G.Setting_table.Weapon)
+									   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+									   AttackNoCD()
+								   until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not Angel
+							   end
+						   end
+					   end
+				   else
+					   StatrMagnet = false
+					   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+						   if v.Name == "God's Guard [Lv. 450]" then
+							   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+						   elseif v.Name == "Shanda [Lv. 475]" then
+							   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+						   elseif v.Name == "Royal Soldier [Lv. 550]" then
+							   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+						   end
+					   end
+					   TP(CFrame.new(-7859.09814, 5544.19043, -381.476196, -0.422592998, 0, 0.906319618, 0, 1, 0, -0.906319618, 0, -0.422592998))
+				   end
+			   end)
+		   end
+	   end
+   end)
+	   spawn(function()
+	   while wait() do
+		   if Leather and Three_World then
+			   pcall(function()
+				   if game.Workspace.Enemies:FindFirstChild("Jungle Pirate [Lv. 1900]") or game.ReplicatedStorage:FindFirstChild("Jungle Pirate [Lv. 1900]") then
+					   if game.Workspace.Enemies:FindFirstChild("Jungle Pirate [Lv. 1900]") then
+						   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+						   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+							   if v.Name == "Jungle Pirate [Lv. 1900]" and v.Humanoid.Health > 0 then
+								   _G.PosMon = v.HumanoidRootPart.CFrame
+								   StatrMagnet = true
+									   repeat wait(_G.Fast_Delay)
+										   for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+											   if v2:IsA("Tool") then
+												   if tostring(v2.ToolTip) == "Melee" then
+													   _G.Setting_table.Weapon = v2.Name
+												   end
+											   end
+										   end
+										   EquipWeapon(_G.Setting_table.Weapon)
+										   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+										   AttackNoCD()
+									   until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not Leather
+								   end
+							   end
+						   end
+					   else
+						   StatrMagnet = false
+						   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+							   if v.Name == "Jungle Pirate [Lv. 1900]" then
+								   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+							   end
+						   end
+						   TP2(CFrame.new(-12267.103515625, 459.75262451172, -10277.200195313))
+					   end
+				   end)
+			   end
+		   end
+	   end)
+		  spawn(function()
+	   while wait() do
+		   if Leather1 and New_World then
+			   pcall(function() 
+			   if game.Workspace.Enemies:FindFirstChild("Swan Pirate [Lv. 775]") or game.ReplicatedStorage:FindFirstChild("Swan Pirate [Lv. 775]") then
+				   if game.Workspace.Enemies:FindFirstChild("Swan Pirate [Lv. 775]") then
+					   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+					   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+						   if v.Name == "Swan Pirate [Lv. 775]" and v.Humanoid.Health > 0 then
+							   _G.PosMon = v.HumanoidRootPart.CFrame
+							   StatrMagnet = true
+								   repeat wait(_G.Fast_Delay)
+									   for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+										   if v2:IsA("Tool") then
+											   if tostring(v2.ToolTip) == "Melee" then
+												   _G.Setting_table.Weapon = v2.Name
+											   end
+										   end
+									   end
+									   EquipWeapon(_G.Setting_table.Weapon)
+									   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+									   AttackNoCD()
+								   until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not Leather1
+							   end
+						   end
+					   end
+				   else
+					   StatrMagnet = false
+					   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+						   if v.Name == "Swan Pirate [Lv. 775]" then
+							   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+						   end
+					   end
+					   TP2(CFrame.new(1065.3669433594, 137.64012145996, 1324.3798828125))
+				   end
+			   end)
+		   end
+	   end
+   end)
+
+   spawn(function()
+	   while wait() do
+		   if Leather2 and Old_World then
+			   pcall(function()
+				   if game.Workspace.Enemies:FindFirstChild("Brute [Lv. 45]") or game.ReplicatedStorage:FindFirstChild("Brute [Lv. 45]") then
+				   if game.Workspace.Enemies:FindFirstChild("Brute [Lv. 45]") then
+					   game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+					   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+						   if v.Name == "Brute [Lv. 45]" and v.Humanoid.Health > 0 then
+							   _G.PosMon = v.HumanoidRootPart.CFrame
+							   StatrMagnet = true
+								   repeat wait(_G.Fast_Delay)
+									   for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+										   if v2:IsA("Tool") then
+											   if tostring(v2.ToolTip) == "Melee" then
+												   _G.Setting_table.Weapon = v2.Name
+											   end
+										   end
+									   end
+									   EquipWeapon(_G.Setting_table.Weapon)
+									   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+									   AttackNoCD()
+								   until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not Leather2
+							   end
+						   end
+					   end
+				   else
+					   StatrMagnet = false
+					   for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+						   if v.Name == "Brute [Lv. 45]" then
+							   TP(v.HumanoidRootPart.CFrame * CFrame.new(1, 30, 0))
+						   end
+					   end
+					   TP2(CFrame.new(-1387.5324707031, 24.592035293579, 4100.9575195313))
+				   end
+			   end)
+		   end
+	   end
+   end)
 
 Mics_Tab:Seperator("Use this to run from PvP :)")
 
