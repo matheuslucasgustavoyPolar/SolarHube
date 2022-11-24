@@ -4939,6 +4939,8 @@ spawn(function()
 												UseSkillMasteryDevilFruit = false
 												EquipWeapon(_G.Setting_table.Weapon)
 												TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 1))
+												game:GetService'VirtualUser':CaptureController()
+												game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
 												local health = v.Humanoid.Health
 												local maxhealth = v.Humanoid.MaxHealth
 												local percent = (health / maxhealth) * 100
@@ -4949,8 +4951,8 @@ spawn(function()
 													wait(1)
 												end
 											end
+											StatrMagnet = false
 										until v.Humanoid.Health <= 0 or not v.Parent or Mix_Farm or not Auto_Farm_Fruit
-										StatrMagnet = false
 									end
 								end
 							elseif game.ReplicatedStorage:FindFirstChild(Ms) then
@@ -5032,6 +5034,8 @@ spawn(function()
 												UseSkillMasteryDevilFruit = false
 												EquipWeapon(_G.Setting_table.Weapon)
 												TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 1))
+												game:GetService'VirtualUser':CaptureController()
+												game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
 												local health = v.Humanoid.Health
 												local maxhealth = v.Humanoid.MaxHealth
 												local percent = (health / maxhealth) * 100
