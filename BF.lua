@@ -2289,7 +2289,7 @@ if IKAI then
 	
 	library = {}
 	
-	function library:Window(text,text2,text3,logo,keybind)
+	function library:Window(text,text2,text3,text4,logo,keybind)
 		local uihide = false
 		local abc = false
 		local logo = logo or 0
@@ -2373,6 +2373,29 @@ if IKAI then
 		Ver.Text = text3
 		Ver.TextColor3 = _G.Color
 		Ver.TextSize = 15.000
+
+		local Hours = Instance.new("TextLabel")
+		Hours.Name = "Hours"
+		Hours.Parent = Top
+		Hours.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Hours.BackgroundTransparency = 1.000
+		Hours.Position = UDim2.new(0.699100000, 0, 0, 1)
+		Hours.Size = UDim2.new(0, 47, 0, 27)
+		Hours.Font = Enum.Font.GothamSemibold
+		Hours.Text = "N/A"
+		Hours.TextColor3 = _G.Color
+		Hours.TextSize = 15.000
+		spawn(function()
+			while wait() do
+local scripttime = game.Workspace.DistributedGameTime
+local seconds = scripttime%60
+local minutes = math.floor(scripttime/60%60)
+local hours = math.floor(scripttime/3600)
+local tempo = string.format("%.0f Hour , %.0f Minute , %.0f Second", hours ,minutes, seconds) --Hours:"..os.date("%H")..":"..os.date("%M")..":"..os.date("%S")
+Hours.Text = " "..os.date("%H")..":"..os.date("%M")..":"..os.date("%S")
+			end
+		end)
+--TextLabeltime.Text = tempo
 
 		local BindButton = Instance.new("TextButton")
 		BindButton.Name = "BindButton"
@@ -3302,12 +3325,12 @@ if IKAI then
 						):Play()
 						DropScroll.CanvasSize = UDim2.new(0,0,0,UIListLayout.AbsoluteContentSize.Y + 10)
 						callback(Item.Text)
-						DropTitle.Text = text.." : "..Item.Text
+						DropTitle.Text = text..": "..Item.Text
 					end)
 				end
 				
 				function dropfunc:Clear()
-					DropTitle.Text = tostring(text).." : "
+					DropTitle.Text = tostring(text)..": "
 					isdropping = false
 					Dropdown:TweenSize(UDim2.new(0,470,0,31),"Out","Quad",0.3,true)
 					TweenService:Create(
@@ -3770,7 +3793,7 @@ end
 --})
 
 --game:GetService("MarketplaceService"):GetProductInfo("2753915549").Name
-local win = library:Window("Solar",[[Hub]],[[Version: 3.58b]], "9606070311",Enum.KeyCode.RightControl)
+local win = library:Window("Solar",[[Hub]],[[Version: 3.58b]],"", "9606070311",Enum.KeyCode.RightControl)
 local General_Tab = win:Tab("General",[[7040391851]])
 local Quest_Tab = win:Tab("    Quest & Item",[[9606626859]])
 local Mics_Tab = win:Tab("Mics",[[9606626034]])
