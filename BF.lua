@@ -67,21 +67,15 @@ repeat task.wait()
     pcall(function()
         if game:GetService("Players").LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") then
             if game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Visible == true then
-			if getgenv().Setting["Join Team"] == "Marines" then
-				game:GetService("Players")["LocalPlayer"].PlayerGui.Main.ChooseTeam.Container.Marines.Frame.ViewportFrame.TextButton.Size = UDim2.new(0, 10000, 0, 10000)
-				game:GetService("Players")["LocalPlayer"].PlayerGui.Main.ChooseTeam.Container.Marines.Frame.ViewportFrame.TextButton.Position = UDim2.new(-4, 0, -5, 0)
-				game:GetService("Players")["LocalPlayer"].PlayerGui.Main.ChooseTeam.Container.Marines.Frame.ViewportFrame.TextButton.BackgroundTransparency = 1
-				task.wait(.5)
-				game:GetService'VirtualUser':Button1Down(Vector2.new(99,99))
-				game:GetService'VirtualUser':Button1Up(Vector2.new(99,99))
+			if _G.Team == "Marines" then
+				for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.ViewportFrame.TextButton.Activated)) do                                                                                                
+					v.Function()
+				end
                 else
-					if getgenv().Setting["Join Team"] == "Pirates" then
-					game:GetService("Players")["LocalPlayer"].PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.Size = UDim2.new(0, 10000, 0, 10000)
-					game:GetService("Players")["LocalPlayer"].PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.Position = UDim2.new(-4, 0, -5, 0)
-					game:GetService("Players")["LocalPlayer"].PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.BackgroundTransparency = 1
-					task.wait(.5)
-					game:GetService'VirtualUser':Button1Down(Vector2.new(99,99))
-					game:GetService'VirtualUser':Button1Up(Vector2.new(99,99))
+					if _G.Team == "Pirates" then
+						for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.Activated)) do                                                                                                
+							v.Function()
+						end
                     end
                 end
             end
