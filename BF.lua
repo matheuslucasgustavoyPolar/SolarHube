@@ -2568,27 +2568,6 @@ Hours.Text = " "..os.date("%H")..":"..os.date("%M")..":"..os.date("%S")
 						TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
 						{BackgroundTransparency = 0}
 					):Play()
-					Frametime:TweenSize(UDim2.new(0, 293, 0, 44),"In","Quad",0.2,true)
-					TweenService:Create(
-						Frametime,
-						TweenInfo.new(0,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-						{BackgroundTransparency = 0}
-					):Play()
-					TweenService:Create(
-						Stroketime,
-						TweenInfo.new(0,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-						{Transparency = 0}
-					):Play()
-					TweenService:Create(
-						TextLabeltime,
-						TweenInfo.new(0,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-						{TextTransparency = 0}
-					):Play()
-					TweenService:Create(
-						ImageLabeltime,
-						TweenInfo.new(0,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-						{ImageTransparency = 0}
-					):Play()
 					Yedhee.TextTransparency = 0
 					Uitoggle.TextTransparency = 0
 					ToggleImgUi.ImageTransparency = 0
@@ -2602,27 +2581,6 @@ Hours.Text = " "..os.date("%H")..":"..os.date("%M")..":"..os.date("%S")
 						ToggleFrameUi,
 						TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
 						{BackgroundTransparency = 1}
-					):Play()
-					Framefps:TweenSize(UDim2.new(0, 0, 0, 0),"In","Quad",0.2,true)
-					game:GetService("TweenService"):Create(
-						Frametime,
-						TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-						{BackgroundTransparency = 1}
-					):Play()
-					TweenService:Create(
-						Stroketime,
-						TweenInfo.new(0,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-						{Transparency = 1}
-					):Play()
-					TweenService:Create(
-						TextLabeltime,
-						TweenInfo.new(0,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-						{TextTransparency = 1}
-					):Play()
-					TweenService:Create(
-						ImageLabeltime,
-						TweenInfo.new(0,Enum.EasingStyle.Quad,Enum.EasingDirection.Out),
-						{ImageTransparency = 1}
 					):Play()
 					Yedhee.TextTransparency = 1
 					Uitoggle.TextTransparency = 1
