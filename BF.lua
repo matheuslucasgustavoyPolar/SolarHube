@@ -1,1 +1,1 @@
-game.Players.LocalPlayer:Kick("Solar Hub is being updated\n There is no release date")
+game.Players.LocalPlayer:Kick("Blox Fruits Script is being updated\n There is no release date")
